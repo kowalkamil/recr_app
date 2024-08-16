@@ -5,33 +5,69 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.LocalDateTime;
+
 @ControllerAdvice
 public class RestExceptionHandler {
 
-
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException e) {
-        return new ResponseEntity<>("User not found: " + e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorMessage> handleUserNotFoundException(UserNotFoundException e) {
+        ErrorMessage error = ErrorMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .message("Conflict occurred")
+                .description(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
     @ExceptionHandler(ApiClientException.class)
-    public ResponseEntity<String> handleApiClientException(ApiClientException e) {
-        return new ResponseEntity<>("Client error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorMessage> handleApiClientException(ApiClientException e) {
+        ErrorMessage error = ErrorMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .message("Client error")
+                .description(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(ApiServerException.class)
-    public ResponseEntity<String> handleApiServerException(ApiServerException e) {
-        return new ResponseEntity<>("Server error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ErrorMessage> handleApiServerException(ApiServerException e) {
+        ErrorMessage error = ErrorMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .message("Server error")
+                .description(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
     @ExceptionHandler(InternalServerErrorException.class)
-    public ResponseEntity<String> handleInternalServerErrorException(InternalServerErrorException e) {
-        return new ResponseEntity<>("Internal server error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ErrorMessage> handleInternalServerErrorException(InternalServerErrorException e) {
+        ErrorMessage error = ErrorMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .message("Internal server error")
+                .description(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGenericException(Exception e) {
-        return new ResponseEntity<>("Unexpected Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ErrorMessage> handleGenericException(Exception e) {
+        ErrorMessage error = ErrorMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .message("Unexpected error")
+                .description(e.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
-
 }
+

@@ -3,7 +3,6 @@ package rekrutacja.zadanie.rekrutacja.service;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
@@ -28,7 +27,6 @@ import rekrutacja.zadanie.rekrutacja.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
     private final ApiRequestCountService apiRequestCountService;
     private final RestTemplate restTemplate;
 
