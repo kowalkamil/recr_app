@@ -31,9 +31,10 @@ public class UserControllerTest {
     @Test
     public void testGetUserSuccess() throws Exception {
         String login = "testuser";
-        UserDto userDto = new UserDto();
-        userDto.setLogin(login);
-        userDto.setName("Test User");
+        UserDto userDto = UserDto.builder()
+                .login(login)
+                .name("testUser")
+                .build();
 
         Mockito.when(userService.findUserInGithub(login)).thenReturn(userDto);
 

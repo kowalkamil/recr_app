@@ -21,8 +21,7 @@ public class UserController {
     @GetMapping("/{login}")
     public ResponseEntity<UserDto> userData(@PathVariable("login") String login) {
         log.info("getUser({})", login);
-        UserDto result = userService.findUserInGithub(login);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(userService.findUserInGithub(login));
     }
 
 }

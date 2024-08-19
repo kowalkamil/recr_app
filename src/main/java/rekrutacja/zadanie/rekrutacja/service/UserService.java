@@ -1,6 +1,5 @@
 package rekrutacja.zadanie.rekrutacja.service;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,16 +16,13 @@ import rekrutacja.zadanie.rekrutacja.exceptions.InternalServerErrorException;
 import rekrutacja.zadanie.rekrutacja.exceptions.UserNotFoundException;
 import rekrutacja.zadanie.rekrutacja.model.dto.UserDto;
 import rekrutacja.zadanie.rekrutacja.model.entity.User;
-import rekrutacja.zadanie.rekrutacja.repository.UserRepository;
 
 @Service
-@Getter
 @RequiredArgsConstructor
 @EnableConfigurationProperties
 @Slf4j
 public class UserService {
 
-    private final UserRepository userRepository;
     private final ApiRequestCountService apiRequestCountService;
     private final RestTemplate restTemplate;
 

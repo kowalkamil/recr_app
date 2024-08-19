@@ -1,6 +1,6 @@
 package rekrutacja.zadanie.rekrutacja.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import rekrutacja.zadanie.rekrutacja.model.entity.ApiRequestCount;
 import rekrutacja.zadanie.rekrutacja.repository.ApiRequestCountRepository;
@@ -8,14 +8,10 @@ import rekrutacja.zadanie.rekrutacja.repository.ApiRequestCountRepository;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ApiRequestCountService {
 
     private final ApiRequestCountRepository apiRequestCountRepository;
-
-    @Autowired
-    public ApiRequestCountService(ApiRequestCountRepository apiRequestCountRepository) {
-        this.apiRequestCountRepository = apiRequestCountRepository;
-    }
 
     public void incrementRequestCount(String login) {
         Optional<ApiRequestCount> existingRecord = apiRequestCountRepository.findById(login);
@@ -25,8 +21,7 @@ public class ApiRequestCountService {
             apiRequestCount.incrementRequestCount();
             apiRequestCountRepository.save(apiRequestCount);
         } else {
-            ApiRequestCount newRecord = new ApiRequestCount(login, 1);
-            apiRequestCountRepository.save(newRecord);
+            apiRequestCountRepository.save(new ApiRequestCount(login, 1));
         }
     }
 }

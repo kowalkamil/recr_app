@@ -4,14 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 import rekrutacja.zadanie.rekrutacja.model.entity.ApiRequestCount;
 import rekrutacja.zadanie.rekrutacja.repository.ApiRequestCountRepository;
 
 import java.util.Optional;
 
 @SpringBootTest
-@Transactional
 public class ApiRequestCountServiceTest {
 
     @Autowired

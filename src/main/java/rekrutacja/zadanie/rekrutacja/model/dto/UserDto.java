@@ -3,7 +3,6 @@ package rekrutacja.zadanie.rekrutacja.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import rekrutacja.zadanie.rekrutacja.model.entity.User;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserDto {
 
     private Long id;
